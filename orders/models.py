@@ -26,6 +26,10 @@ class Ticket(models.Model):
         on_delete=models.CASCADE
     )
 
+    class Meta:
+        unique_together = ("flight", "row", "seat")
+        ordering = ["row", "seat"]
+
     @staticmethod
     def validate_ticket(row, seat, flight, error_to_raise):
         for ticket_attr_value, ticket_attr_name, flight_attr_name in [

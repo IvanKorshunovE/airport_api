@@ -2,7 +2,7 @@ from django.db import transaction
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from flights.serializers import FlightReadSerializer, DefaultFlightSerializer
+from flights.serializers import DefaultFlightSerializer
 from orders.models import Order, Ticket
 
 
@@ -24,6 +24,7 @@ class TicketSerializer(serializers.ModelSerializer):
 
 
 class TicketListSerializer(TicketSerializer):
+
     flight = DefaultFlightSerializer(many=False, read_only=True)
 
 

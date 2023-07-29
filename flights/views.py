@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAdminUser
 from flights.models import Flight
 from flights.serializers import (
     FlightReadSerializer,
-    FlightCreateSerializer
+    FlightCreateSerializer, FlightDetailSerializer
 )
 
 
@@ -25,6 +25,8 @@ class FlightViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
 
     def get_serializer_class(self):
-        if self.action in ["list", "retrieve"]:
+        if self.action == "list":
             return FlightReadSerializer
+        if self.action == "retrieve":
+            return FlightDetailSerializer
         return FlightCreateSerializer

@@ -1,7 +1,15 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
-from flights.models import Flight
+from flights.models import Flight, Airplane
+from orders.models import Ticket
 from routes.serializers import RouteReadSerializer
+
+
+class AirplaneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Airplane
+        fields = "__all__"
 
 
 class DefaultFlightSerializer(serializers.ModelSerializer):
@@ -12,7 +20,7 @@ class DefaultFlightSerializer(serializers.ModelSerializer):
 
 class FlightReadSerializer(serializers.ModelSerializer):
     route = RouteReadSerializer()
-    # tickets_available = serializers.IntegerField()
+    tickets_available = serializers.IntegerField()
 
     class Meta:
         model = Flight
@@ -22,7 +30,50 @@ class FlightReadSerializer(serializers.ModelSerializer):
             "airplane",
             "departure_time",
             "arrival_time",
-            # "tickets_available"
+            "tickets_available"
+        )
+
+
+class TicketSerializer(serializers.ModelSerializer):
+    # Can't import due to the circular import
+
+    class Meta:
+        model = Ticket
+        fields = ("id", "row", "seat", "flight")
+
+    def validate(self, attrs):
+        data = super().validate(attrs=attrs)
+        Ticket.validate_ticket(
+            attrs["row"],
+            attrs["seat"],
+            attrs["flight"].airplane,
+            ValidationError
+        )
+        return data
+
+
+class TicketSeatsSerializer(TicketSerializer):
+    class Meta:
+        model = Ticket
+        fields = ("row", "seat")
+
+
+class FlightDetailSerializer(DefaultFlightSerializer):
+    route = RouteReadSerializer(many=False, read_only=True)
+    airplane = AirplaneSerializer(many=False, read_only=True)
+    taken_places = TicketSeatsSerializer(
+        source="tickets", many=True, read_only=True
+    )
+
+    class Meta:
+        model = Flight
+        fields = (
+            "id",
+            "departure_time",
+            "arrival_time",
+            "route",
+            "airplane",
+            "taken_places"
         )
 
 
