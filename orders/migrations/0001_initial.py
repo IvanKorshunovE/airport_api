@@ -7,11 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
     initial = True
 
-    dependencies = []
+    dependencies = [
+        ("flights", "0001_initial"),
+    ]
 
     operations = [
         migrations.CreateModel(
-            name="Airport",
+            name="Order",
             fields=[
                 (
                     "id",
@@ -22,12 +24,11 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("name", models.CharField(max_length=255, unique=True)),
-                ("closest_big_city", models.CharField(max_length=255)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name="Route",
+            name="Ticket",
             fields=[
                 (
                     "id",
@@ -38,26 +39,24 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("distance", models.IntegerField()),
+                ("row", models.IntegerField()),
+                ("seat", models.IntegerField()),
                 (
-                    "destination",
+                    "flight",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="destination_routes",
-                        to="routes.airport",
+                        related_name="tickets",
+                        to="flights.flight",
                     ),
                 ),
                 (
-                    "source",
+                    "order",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="source_routes",
-                        to="routes.airport",
+                        related_name="tickets",
+                        to="orders.order",
                     ),
                 ),
             ],
-            options={
-                "unique_together": {("source", "destination")},
-            },
         ),
     ]

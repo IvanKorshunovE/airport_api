@@ -2,7 +2,10 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 
 from flights.models import Flight
-from flights.serializers import FlightReadSerializer, FlightCreateSerializer
+from flights.serializers import (
+    FlightReadSerializer,
+    FlightCreateSerializer
+)
 
 
 class FlightViewSet(viewsets.ModelViewSet):
