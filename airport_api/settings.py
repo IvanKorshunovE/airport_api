@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "debug_toolbar",
     "routes",
+    "flights",
 ]
 
 MIDDLEWARE = [

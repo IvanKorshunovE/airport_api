@@ -1,12 +1,12 @@
-from django.contrib.postgres.aggregates import ArrayAgg
-from django.db.models import Count, F
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 
 from routes.models import Airport, Route
 from routes.serializers import (
-    AirportSerializer,
-    RouteReadSerializer, RouteCreateSerializer,
+    # AirportSerializer,
+    RouteReadSerializer,
+    RouteCreateSerializer,
+    AirportRouteSerializer,
 )
 
 
@@ -32,5 +32,5 @@ class AirportViewSet(viewsets.ModelViewSet):
         )
         .all()
     )
-    serializer_class = AirportSerializer
+    serializer_class = AirportRouteSerializer
     permission_classes = [IsAdminUser]
