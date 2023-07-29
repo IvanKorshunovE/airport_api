@@ -1,3 +1,4 @@
+from django.db.models import F, Count
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser
 
@@ -14,6 +15,11 @@ class FlightViewSet(viewsets.ModelViewSet):
         .select_related(
             "route__source",
             "route__destination",
+        ).annotate(
+            tickets_available=(
+                    F("airplane__rows") * F("airplane__seats_in_row")
+                    - Count("tickets")
+            )
         )
     )
     permission_classes = [IsAdminUser]

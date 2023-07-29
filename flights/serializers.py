@@ -6,6 +6,7 @@ from routes.serializers import RouteReadSerializer
 
 class FlightReadSerializer(serializers.ModelSerializer):
     route = RouteReadSerializer()
+    tickets_available = serializers.IntegerField()
 
     class Meta:
         model = Flight
@@ -15,6 +16,7 @@ class FlightReadSerializer(serializers.ModelSerializer):
             "airplane",
             "departure_time",
             "arrival_time",
+            "tickets_available"
         )
 
 
