@@ -1,7 +1,8 @@
 from django.db import transaction
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
-from flights.serializers import FlightReadSerializer
+from flights.serializers import FlightReadSerializer, DefaultFlightSerializer
 from orders.models import Order, Ticket
 
 
@@ -11,9 +12,19 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = ("id", "row", "seat", "flight")
 
+    def validate(self, attrs):
+        data = super().validate(attrs=attrs)
+        Ticket.validate_ticket(
+            attrs["row"],
+            attrs["seat"],
+            attrs["flight"].airplane,
+            ValidationError
+        )
+        return data
+
 
 class TicketListSerializer(TicketSerializer):
-    flight = FlightReadSerializer(many=False, read_only=True)
+    flight = DefaultFlightSerializer(many=False, read_only=True)
 
 
 # class TicketSeatsSerializer(TicketSerializer):
