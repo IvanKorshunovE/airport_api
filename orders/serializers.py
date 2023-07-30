@@ -24,14 +24,7 @@ class TicketSerializer(serializers.ModelSerializer):
 
 
 class TicketListSerializer(TicketSerializer):
-
     flight = DefaultFlightSerializer(many=False, read_only=True)
-
-
-# class TicketSeatsSerializer(TicketSerializer):
-#     class Meta:
-#         model = Ticket
-#         fields = ("row", "seat")
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):

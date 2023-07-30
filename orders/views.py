@@ -18,9 +18,10 @@ class OrderViewSet(
 ):
     queryset = (
         Order.objects
-        # .prefetch_related(
-        #     "tickets__movie_session__movie", "tickets__movie_session__cinema_hall"
-        # )
+        .prefetch_related(
+            "tickets__flight__route__source",
+            "tickets__flight__route__destination",
+        )
         .all()
     )
     pagination_class = OrderPagination

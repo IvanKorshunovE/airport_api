@@ -13,6 +13,8 @@ class AirplaneSerializer(serializers.ModelSerializer):
 
 
 class DefaultFlightSerializer(serializers.ModelSerializer):
+    route = RouteReadSerializer()
+
     class Meta:
         model = Flight
         fields = "__all__"

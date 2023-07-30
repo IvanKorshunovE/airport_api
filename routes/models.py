@@ -8,17 +8,17 @@ class Airport(models.Model):
 
     def __str__(self):
         return self.name
-
-    def get_destination_names(self):
-        """
-        This method returns all airport
-        names that user can fly from the
-        current airport
-        """
-        return [
-            route.destination.name
-            for route in self.source_routes.all()
-        ]
+    #
+    # def get_destination_names(self):
+    #     """
+    #     This method returns all airport
+    #     names that user can fly from the
+    #     current airport
+    #     """
+    #     return [
+    #         route.destination.name
+    #         for route in self.source_routes.all()
+    #     ]
 
 
 class Route(models.Model):
