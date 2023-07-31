@@ -28,3 +28,10 @@ class RouteCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
         fields = ("id", "source", "destination", "distance")
+
+
+class AirportImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Airport
+        fields = ("id", "image")

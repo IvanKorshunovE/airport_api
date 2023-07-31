@@ -1,9 +1,23 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from flights.models import Flight, Airplane
+from flights.models import (
+    Flight, Airplane, Crew, AirplaneType
+)
 from orders.models import Ticket
 from routes.serializers import RouteReadSerializer
+
+
+class AirplaneTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AirplaneType
+        fields = "__all__"
+
+
+class CrewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Crew
+        fields = "__all__"
 
 
 class AirplaneSerializer(serializers.ModelSerializer):
@@ -37,7 +51,6 @@ class FlightReadSerializer(serializers.ModelSerializer):
 
 
 class TicketSerializer(serializers.ModelSerializer):
-    # Can't import due to the circular import
 
     class Meta:
         model = Ticket
