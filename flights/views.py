@@ -9,15 +9,18 @@ from rest_framework.permissions import IsAdminUser
 from flights.models import (
     Flight,
     Crew,
-    Airplane, AirplaneType
+    Airplane,
+    AirplaneType
 )
+
 from flights.permissions import IsAdminOrIfAuthenticatedReadOnly
 from flights.serializers import (
     FlightReadSerializer,
     FlightCreateSerializer,
     FlightDetailSerializer,
     CrewSerializer,
-    AirplaneSerializer, AirplaneTypeSerializer
+    AirplaneSerializer,
+    AirplaneTypeSerializer
 )
 
 
@@ -82,7 +85,7 @@ class FlightViewSet(viewsets.ModelViewSet):
 class CrewViewSet(viewsets.ModelViewSet):
     queryset = Crew.objects.all()
     serializer_class = CrewSerializer
-    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
+    permission_classes = (IsAdminUser,)
 
 
 class AirplaneViewSet(viewsets.ModelViewSet):
