@@ -1,10 +1,14 @@
 import os
+from dotenv import load_dotenv
 
 from pathlib import Path
 
+load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-z9hu*sq2x*7)uo_shj2ate^sx_knr=n5qu$u@qgz@_#rk37(a1"
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 
 DEBUG = True
 
@@ -115,7 +119,7 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Airport API",
-    "DESCRIPTION": "Your project description",
+    "DESCRIPTION": "Description",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
