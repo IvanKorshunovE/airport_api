@@ -11,9 +11,9 @@ def airport_image_file_path(instance, file_name):
     file_name = (
         f"{slugify(instance.name)}"
         f"-{slugify(instance.closest_big_city)}"
-        f"-{uuid.uuid4()}.{extension}"
+        f"-{uuid.uuid4()}{extension}"
     )
-    return os.path.join("uploads/airports", file_name)
+    return os.path.join("uploads", "airports", file_name)
 
 
 class Airport(models.Model):
