@@ -1,6 +1,6 @@
-# Flights and Airport API 
+# SkyLink
 
-The Airport API is a comprehensive RESTful API designed to manage flight-related information and operations. It facilitates interaction with various resources, including flights, crews, airplanes, airplane types, orders, and tickets. The API empowers airlines, travel agencies, and other aviation-related services to efficiently handle flight data, bookings, and logistics.
+SkyLink is a comprehensive RESTful API designed to manage flight-related information and operations. It facilitates interaction with various resources, including flights, crews, airplanes, airplane types, orders, and tickets. The API empowers airlines, travel agencies, and other aviation-related services to efficiently handle flight data, bookings, and logistics.
 ## Requirements
 - Python 3.x
 - Django
