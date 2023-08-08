@@ -8,7 +8,7 @@ SkyLink is a comprehensive RESTful API designed to manage flight-related informa
 
 ### How to Run
 
-1. Clone the repository: `git clone https://github.com/IvanKorshunovE/airport_api`
+1. Clone the repository: `git clone https://github.com/IvanKorshunovE/sky_link`
 2. Change to the project directory: `cd airport_api`
 3. Create a virtual environment: `python -m venv venv`
 4. Activate the virtual environment: `source venv/bin/activate`
